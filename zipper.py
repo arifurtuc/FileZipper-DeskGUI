@@ -14,10 +14,13 @@ destination_browse_button = sg.FolderBrowse("Browse", key="folder")
 # Create a "Compress" button for initiating the compression process
 compress_button = sg.Button("Compress")
 
+# Create a Success message text field for successful compression process
+success_message = sg.Text(key="success", text_color="green")
+
 # Create the main user interface window
 layout = [[select_files_label, files_input, files_browse_button],
           [select_destination_label, destination_input, destination_browse_button],
-          [compress_button]]
+          [compress_button, success_message]]
 window = sg.Window("File Compressor",
                    layout=layout,
                    font=('Helvetica', 20))
@@ -25,9 +28,15 @@ window = sg.Window("File Compressor",
 # Wait for user interactions and collect user input from the GUI window
 while True:
     event, values = window.read()
+
+    match event:
+        case sg.WIN_CLOSED:
+            exit()
+
     filepaths = values["files"].split(";")
     folder_path = values["folder"]
     make_archive(filepaths, folder_path)
+    window["success"].update(value="Compression has been completed successfully!")
 
 # Close the GUI window after user interaction is complete
 window.close()
