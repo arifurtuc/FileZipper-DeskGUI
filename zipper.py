@@ -30,13 +30,13 @@ while True:
     event, values = window.read()
 
     match event:
+        case 'Compress':
+            filepaths = values["files"].split(";")
+            folder_path = values["folder"]
+            make_archive(filepaths, folder_path)
+            window["success"].update(value="Compression has been completed successfully!")
         case sg.WIN_CLOSED:
-            exit()
-
-    filepaths = values["files"].split(";")
-    folder_path = values["folder"]
-    make_archive(filepaths, folder_path)
-    window["success"].update(value="Compression has been completed successfully!")
+            break
 
 # Close the GUI window after user interaction is complete
 window.close()
