@@ -34,10 +34,19 @@ while True:
 
     match event:
         case 'Compress':
-            filepaths = values["files"].split(";")
-            folder_path = values["folder"]
-            make_archive(filepaths, folder_path)
-            window["success"].update(value="Compression has been completed successfully!")
+            if values["files"] and values["folder"]:
+                filepaths = values["files"].split(";")
+                folder_path = values["folder"]
+                make_archive(filepaths, folder_path)
+                window["success"].update(value="Compression has been completed successfully!")
+            elif not values["files"]:
+                sg.popup("Select files first!",
+                         font=("Helvetica", 20),
+                         title="Selection Error")
+            elif not values["folder"]:
+                sg.popup("Select destination folder!",
+                         font=("Helvetica", 20),
+                         title="Selection Error")
         case sg.WIN_CLOSED:
             break
 

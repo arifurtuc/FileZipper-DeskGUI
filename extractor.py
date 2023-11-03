@@ -34,10 +34,19 @@ while True:
 
     match event:
         case 'Extract':
-            filepath = values["archive"]
-            folder_path = values["folder"]
-            extract_archive(filepath, folder_path)
-            window["success"].update(value="Extraction has been completed successfully!")
+            if values["archive"] and values["folder"]:
+                filepath = values["archive"]
+                folder_path = values["folder"]
+                extract_archive(filepath, folder_path)
+                window["success"].update(value="Extraction has been completed successfully!")
+            elif not values["archive"]:
+                sg.popup("Select archive first!",
+                         font=("Helvetica", 20),
+                         title="Selection Error")
+            elif not values["folder"]:
+                sg.popup("Select destination folder!",
+                         font=("Helvetica", 20),
+                         title="Selection Error")
         case sg.WIN_CLOSED:
             break
 
