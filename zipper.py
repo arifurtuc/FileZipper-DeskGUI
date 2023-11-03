@@ -39,14 +39,13 @@ while True:
                 folder_path = values["folder"]
                 make_archive(filepaths, folder_path)
                 window["success"].update(value="Compression has been completed successfully!")
-            elif not values["files"]:
-                sg.popup("Select files first!",
-                         font=("Helvetica", 20),
-                         title="Selection Error")
-            elif not values["folder"]:
-                sg.popup("Select destination folder!",
-                         font=("Helvetica", 20),
-                         title="Selection Error")
+            else:
+                if not values["files"]:
+                    message = "Select files first!"
+                else:
+                    message = "Select destination folder!"
+
+                sg.popup(message, font=("Helvetica", 20), title="Selection Error")
         case sg.WIN_CLOSED:
             break
 
