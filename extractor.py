@@ -1,6 +1,9 @@
 import PySimpleGUI as sg
 from functions import extract_archive
 
+# GUI Theme
+sg.theme("Dark2")
+
 # Create labels and input elements for selecting file to extractor
 select_file_label = sg.Text("Select Archive")
 file_input = sg.Input()

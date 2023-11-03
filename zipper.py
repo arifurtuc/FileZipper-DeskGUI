@@ -1,6 +1,9 @@
 import PySimpleGUI as sg
 from functions import make_archive
 
+# GUI Theme
+sg.theme("Dark2")
+
 # Create labels and input elements for selecting files to compress
 select_files_label = sg.Text("Select files to compress:")
 files_input = sg.Input()
